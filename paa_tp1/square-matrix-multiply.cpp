@@ -187,7 +187,7 @@ int main(int argc, char** argv){
     // Multiplicação das matrizes usando o algoritmo Square Matrix Multiply.
 	// Início medição de tempo
 	auto begin = chrono::high_resolution_clock::now();
-    vector<vector<int>> C1 = squareMatrixMultiply(A, B);
+	vector<vector<int>> C1 = squareMatrixMultiply(A, B);
 	// Fim medição de tempo
 	auto end = chrono::high_resolution_clock::now();
 	auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
@@ -199,7 +199,7 @@ int main(int argc, char** argv){
     // Multiplicação das matrizes usando o algoritmo de Strassen
 	// Início medição de tempo
 	begin = chrono::high_resolution_clock::now();
-    vector<vector<int>> C2 = strassen(A, B);
+	vector<vector<int>> C2 = strassen(A, B);
 	// Fim medição de tempo
 	end = chrono::high_resolution_clock::now();
 	elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
