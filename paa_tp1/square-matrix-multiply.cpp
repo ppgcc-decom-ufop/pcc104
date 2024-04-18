@@ -43,6 +43,54 @@ void printMatrix(const vector<vector<int>>& matrix) {
     }
 }
 
+// Função para multiplicação de matrizes usando Dividir para Conquistar.
+vector<vector<int>> squareMatrixMultiply(const vector<vector<int>>& A, const vector<vector<int>>& B) {
+    int n = A.size();
+    vector<vector<int>> C(n, vector<int>(n, 0));
+    if (n == 1) {
+        C[0][0] = A[0][0] * B[0][0];
+    } else {
+        // Dividindo as matrizes em submatrizes
+        int newSize = n / 2;
+        vector<vector<int>> A11(newSize, vector<int>(newSize));
+        vector<vector<int>> A12(newSize, vector<int>(newSize));
+        vector<vector<int>> A21(newSize, vector<int>(newSize));
+        vector<vector<int>> A22(newSize, vector<int>(newSize));
+        vector<vector<int>> B11(newSize, vector<int>(newSize));
+        vector<vector<int>> B12(newSize, vector<int>(newSize));
+        vector<vector<int>> B21(newSize, vector<int>(newSize));
+        vector<vector<int>> B22(newSize, vector<int>(newSize));
+        for (int i = 0; i < newSize; ++i) {
+            for (int j = 0; j < newSize; ++j) {
+                A11[i][j] = A[i][j];
+                A12[i][j] = A[i][j + newSize];
+                A21[i][j] = A[i + newSize][j];
+                A22[i][j] = A[i + newSize][j + newSize];
+
+                B11[i][j] = B[i][j];
+                B12[i][j] = B[i][j + newSize];
+                B21[i][j] = B[i + newSize][j];
+                B22[i][j] = B[i + newSize][j + newSize];
+            }
+        }
+        // Calculando os elementos da matriz C
+        vector<vector<int>> C11 = addMatrices(squareMatrixMultiply(A11, B11), squareMatrixMultiply(A12, B21));
+        vector<vector<int>> C12 = addMatrices(squareMatrixMultiply(A11, B12), squareMatrixMultiply(A12, B22));
+        vector<vector<int>> C21 = addMatrices(squareMatrixMultiply(A21, B11), squareMatrixMultiply(A22, B21));
+        vector<vector<int>> C22 = addMatrices(squareMatrixMultiply(A21, B12), squareMatrixMultiply(A22, B22));
+        // Combinando as submatrizes para obter a matriz C
+        for (int i = 0; i < newSize; ++i) {
+            for (int j = 0; j < newSize; ++j) {
+                C[i][j] = C11[i][j];
+                C[i][j + newSize] = C12[i][j];
+                C[i + newSize][j] = C21[i][j];
+                C[i + newSize][j + newSize] = C22[i][j];
+            }
+        }
+    }
+    return C;
+}
+
 // Função para multiplicar matrizes usando o algoritmo de Strassen.
 vector<vector<int>> strassen(const vector<vector<int>>& A, const vector<vector<int>>& B) {
     int n = A.size();
@@ -86,54 +134,6 @@ vector<vector<int>> strassen(const vector<vector<int>>& A, const vector<vector<i
         vector<vector<int>> C12 = addMatrices(P1, P2);
         vector<vector<int>> C21 = addMatrices(P3, P4);
         vector<vector<int>> C22 = subtractMatrices(subtractMatrices(addMatrices(P5, P1), P3), P7);
-        // Combinando as submatrizes para obter a matriz C
-        for (int i = 0; i < newSize; ++i) {
-            for (int j = 0; j < newSize; ++j) {
-                C[i][j] = C11[i][j];
-                C[i][j + newSize] = C12[i][j];
-                C[i + newSize][j] = C21[i][j];
-                C[i + newSize][j + newSize] = C22[i][j];
-            }
-        }
-    }
-    return C;
-}
-
-// Função para multiplicação de matrizes usando Dividir para Conquistar.
-vector<vector<int>> squareMatrixMultiply(const vector<vector<int>>& A, const vector<vector<int>>& B) {
-    int n = A.size();
-    vector<vector<int>> C(n, vector<int>(n, 0));
-    if (n == 1) {
-        C[0][0] = A[0][0] * B[0][0];
-    } else {
-        // Dividindo as matrizes em submatrizes
-        int newSize = n / 2;
-        vector<vector<int>> A11(newSize, vector<int>(newSize));
-        vector<vector<int>> A12(newSize, vector<int>(newSize));
-        vector<vector<int>> A21(newSize, vector<int>(newSize));
-        vector<vector<int>> A22(newSize, vector<int>(newSize));
-        vector<vector<int>> B11(newSize, vector<int>(newSize));
-        vector<vector<int>> B12(newSize, vector<int>(newSize));
-        vector<vector<int>> B21(newSize, vector<int>(newSize));
-        vector<vector<int>> B22(newSize, vector<int>(newSize));
-        for (int i = 0; i < newSize; ++i) {
-            for (int j = 0; j < newSize; ++j) {
-                A11[i][j] = A[i][j];
-                A12[i][j] = A[i][j + newSize];
-                A21[i][j] = A[i + newSize][j];
-                A22[i][j] = A[i + newSize][j + newSize];
-
-                B11[i][j] = B[i][j];
-                B12[i][j] = B[i][j + newSize];
-                B21[i][j] = B[i + newSize][j];
-                B22[i][j] = B[i + newSize][j + newSize];
-            }
-        }
-        // Calculando os elementos da matriz C
-        vector<vector<int>> C11 = addMatrices(squareMatrixMultiply(A11, B11), squareMatrixMultiply(A12, B21));
-        vector<vector<int>> C12 = addMatrices(squareMatrixMultiply(A11, B12), squareMatrixMultiply(A12, B22));
-        vector<vector<int>> C21 = addMatrices(squareMatrixMultiply(A21, B11), squareMatrixMultiply(A22, B21));
-        vector<vector<int>> C22 = addMatrices(squareMatrixMultiply(A21, B12), squareMatrixMultiply(A22, B22));
         // Combinando as submatrizes para obter a matriz C
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
