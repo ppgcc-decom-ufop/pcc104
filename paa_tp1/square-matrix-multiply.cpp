@@ -149,64 +149,64 @@ vector<vector<int>> squareMatrixMultiply(const vector<vector<int>>& A, const vec
 
 // Função principal.
 int main(int argc, char** argv){
-	if (argc < 2){
-		cout << "Execute: file_to_matrix.exe <arquivo.dat>" << endl;
-		return -1;
-	}
-	else
-		cout << "Arquivo de entrada: " << argv[1] << endl;
+    if (argc < 2){
+        cout << "Execute: file_to_matrix.exe <arquivo.dat>" << endl;
+        return -1;
+    }
+    else
+        cout << "Arquivo de entrada: " << argv[1] << endl;
 
-	ifstream inputFile(argv[1]);
-	if (!inputFile.is_open()) {
-		cerr << "Erro ao abrir o arquivo." << endl;
-		return 1;
-	}
+    ifstream inputFile(argv[1]);
+    if (!inputFile.is_open()) {
+        cerr << "Erro ao abrir o arquivo." << endl;
+        return 1;
+    }
 
     int n;
     inputFile >> n;
     vector<vector<int>> A(n, vector<int>(n));
     vector<vector<int>> B(n, vector<int>(n));
 
-	// Leitura das matrizes A e B do arquivo
-	for (int i = 0; i < n; ++i)
-		for (int j = 0; j < n; ++j)
-			inputFile >> A[i][j];
+    // Leitura das matrizes A e B do arquivo
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            inputFile >> A[i][j];
 
-	for (int i = 0; i < n; ++i)
-		for (int j = 0; j < n; ++j)
-			inputFile >> B[i][j];
+    for (int i = 0; i < n; ++i)
+        for (int j = 0; j < n; ++j)
+            inputFile >> B[i][j];
 
-	inputFile.close();
+    inputFile.close();
 
-	cout << "\nMatriz A:" << endl;
-	printMatrix(A);
+    cout << "\nMatriz A:" << endl;
+    printMatrix(A);
 
-	cout << "\nMatriz B:" << endl;
-	printMatrix(B);
+    cout << "\nMatriz B:" << endl;
+    printMatrix(B);
 
-	// Multiplicação das matrizes usando o algoritmo Square Matrix Multiply.
-	// Início medição de tempo
-	auto begin = chrono::high_resolution_clock::now();
-	vector<vector<int>> C1 = squareMatrixMultiply(A, B);
-	// Fim medição de tempo
-	auto end = chrono::high_resolution_clock::now();
-	auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
-	cout << "\nTempo de execucao [Square Matrix Multiply]: " << elapsed.count() * 1e-9 << endl;
-	// Impressão da matriz resultante
-	cout << "Matrix C:" << endl;
-	printMatrix(C1);
+    // Multiplicação das matrizes usando o algoritmo Square Matrix Multiply.
+    // Início medição de tempo
+    auto begin = chrono::high_resolution_clock::now();
+    vector<vector<int>> C1 = squareMatrixMultiply(A, B);
+    // Fim medição de tempo
+    auto end = chrono::high_resolution_clock::now();
+    auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+    cout << "\nTempo de execucao [Square Matrix Multiply]: " << elapsed.count() * 1e-9 << endl;
+    // Impressão da matriz resultante
+    cout << "Matrix C:" << endl;
+    printMatrix(C1);
 
-	// Multiplicação das matrizes usando o algoritmo de Strassen
-	// Início medição de tempo
-	begin = chrono::high_resolution_clock::now();
-	vector<vector<int>> C2 = strassen(A, B);
-	// Fim medição de tempo
-	end = chrono::high_resolution_clock::now();
-	elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
-	cout << "\nTempo de execucao [Algoritmo de Strassen]: " << elapsed.count() * 1e-9 << endl;
-	// Impressão da matriz resultante
-	cout << "Matrix C:" << endl;
-	printMatrix(C2);
+    // Multiplicação das matrizes usando o algoritmo de Strassen
+    // Início medição de tempo
+    begin = chrono::high_resolution_clock::now();
+    vector<vector<int>> C2 = strassen(A, B);
+    // Fim medição de tempo
+    end = chrono::high_resolution_clock::now();
+    elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+    cout << "\nTempo de execucao [Algoritmo de Strassen]: " << elapsed.count() * 1e-9 << endl;
+    // Impressão da matriz resultante
+    cout << "Matrix C:" << endl;
+    printMatrix(C2);
 
-	return 0;
+    return 0;
 }
