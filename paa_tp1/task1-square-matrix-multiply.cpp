@@ -14,47 +14,47 @@
 using namespace std;
 
 class Matrix {
-	public:
-		Matrix(int size);
-		Matrix(vector<vector<int>> matrixElements);
-		//~Matrix();
-		void setElement(int i, int j, int value);
-		void printMatrix();
-		void printMatrix(int n);
-		void printMatrix(const vector<vector<int>>& matrix);
-		vector<vector<int>> squareMatrixMultiply(Matrix B);
-		vector<vector<int>> squareMatrixMultiply(const vector<vector<int>>& A, const vector<vector<int>>& B);
-		vector<vector<int>> strassen(Matrix B);
-		vector<vector<int>> strassen(const vector<vector<int>>& A, const vector<vector<int>>& B);
-	private:
-		vector<vector<int>> elements;
-		vector<vector<int>> *ptE;
-		vector<vector<int>> addMatrices(Matrix B);
-		vector<vector<int>> addMatrices(const vector<vector<int>>& A, const vector<vector<int>>& B);
-		vector<vector<int>> subtractMatrices(Matrix B);
-		vector<vector<int>> subtractMatrices(const vector<vector<int>>& A, const vector<vector<int>>& B);	
-		
+    public:
+        Matrix(int size);
+        Matrix(vector<vector<int>> matrixElements);
+        //~Matrix();
+        void setElement(int i, int j, int value);
+        void printMatrix();
+        void printMatrix(int n);
+        void printMatrix(const vector<vector<int>>& matrix);
+        vector<vector<int>> squareMatrixMultiply(Matrix B);
+        vector<vector<int>> squareMatrixMultiply(const vector<vector<int>>& A, const vector<vector<int>>& B);
+        vector<vector<int>> strassen(Matrix B);
+        vector<vector<int>> strassen(const vector<vector<int>>& A, const vector<vector<int>>& B);
+    private:
+        vector<vector<int>> elements;
+        vector<vector<int>> *ptE;
+        vector<vector<int>> addMatrices(Matrix B);
+        vector<vector<int>> addMatrices(const vector<vector<int>>& A, const vector<vector<int>>& B);
+        vector<vector<int>> subtractMatrices(Matrix B);
+        vector<vector<int>> subtractMatrices(const vector<vector<int>>& A, const vector<vector<int>>& B);    
+        
 };
 
 // Método construtor.
 Matrix::Matrix(int size){
-	// Se a ordem das matrizes não for uma potência de 2, preencha com zeros
-	int nextPowerOfTwo = 1;
-	while (nextPowerOfTwo < size) {
-		nextPowerOfTwo *= 2;
-	}
+    // Se a ordem das matrizes não for uma potência de 2, preencha com zeros
+    int nextPowerOfTwo = 1;
+    while (nextPowerOfTwo < size) {
+        nextPowerOfTwo *= 2;
+    }
 
-	ptE = new vector<vector<int>>(nextPowerOfTwo, vector<int>(nextPowerOfTwo));
-	elements = *ptE;
+    ptE = new vector<vector<int>>(nextPowerOfTwo, vector<int>(nextPowerOfTwo));
+    elements = *ptE;
 }
 
 // Método construtor.
 Matrix::Matrix(vector<vector<int>> matrixElements){
-	elements = matrixElements;
+    elements = matrixElements;
 }
 
 void Matrix::setElement(int i, int j, int value){
-	elements[i][j] = value;
+    elements[i][j] = value;
 }
 
 // Método para imprimir uma matriz.
@@ -71,7 +71,7 @@ void Matrix::printMatrix() {
 void Matrix::printMatrix(int n) {
     for (int i = 0; i < n; ++i){
         for (int j = 0; j < n; ++j)
-			cout << elements[i][j] << " ";
+            cout << elements[i][j] << " ";
         cout << endl;
     }
 }
@@ -135,16 +135,16 @@ vector<vector<int>> Matrix::squareMatrixMultiply(Matrix B) {
     } else {
         // Dividindo as matrizes em submatrizes
         int newSize = n / 2;
-				
-		Matrix mA11(newSize);
-		Matrix mA12(newSize);
-		Matrix mA21(newSize);
-		Matrix mA22(newSize);
-		Matrix mB11(newSize);
-		Matrix mB12(newSize);
-		Matrix mB21(newSize);
-		Matrix mB22(newSize);
-		
+                
+        Matrix mA11(newSize);
+        Matrix mA12(newSize);
+        Matrix mA21(newSize);
+        Matrix mA22(newSize);
+        Matrix mB11(newSize);
+        Matrix mB12(newSize);
+        Matrix mB21(newSize);
+        Matrix mB22(newSize);
+        
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
                 mA11.setElement(i, j, elements[i][j]);
@@ -163,7 +163,7 @@ vector<vector<int>> Matrix::squareMatrixMultiply(Matrix B) {
         vector<vector<int>> C12 = Matrix(mA11.squareMatrixMultiply(mB12)).addMatrices(Matrix(mA12.squareMatrixMultiply(mB22)));
         vector<vector<int>> C21 = Matrix(mA21.squareMatrixMultiply(mB11)).addMatrices(Matrix(mA22.squareMatrixMultiply(mB21)));
         vector<vector<int>> C22 = Matrix(mA21.squareMatrixMultiply(mB12)).addMatrices(Matrix(mA22.squareMatrixMultiply(mB22)));
-		
+        
         // Combinando as submatrizes para obter a matriz C
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
@@ -207,13 +207,13 @@ vector<vector<int>> Matrix::squareMatrixMultiply(const vector<vector<int>>& A, c
                 B22[i][j] = B[i + newSize][j + newSize];
             }
         }
-		
+        
         // Calculando os elementos da matriz C
         vector<vector<int>> C11 = addMatrices(squareMatrixMultiply(A11, B11), squareMatrixMultiply(A12, B21));
         vector<vector<int>> C12 = addMatrices(squareMatrixMultiply(A11, B12), squareMatrixMultiply(A12, B22));
         vector<vector<int>> C21 = addMatrices(squareMatrixMultiply(A21, B11), squareMatrixMultiply(A22, B21));
         vector<vector<int>> C22 = addMatrices(squareMatrixMultiply(A21, B12), squareMatrixMultiply(A22, B22));
-		
+        
         // Combinando as submatrizes para obter a matriz C
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
@@ -236,16 +236,16 @@ vector<vector<int>> Matrix::strassen(Matrix B) {
     } else {
         // Dividindo as matrizes em submatrizes
         int newSize = n / 2;
-		
-		Matrix mA11(newSize);
-		Matrix mA12(newSize);
-		Matrix mA21(newSize);
-		Matrix mA22(newSize);
-		Matrix mB11(newSize);
-		Matrix mB12(newSize);
-		Matrix mB21(newSize);
-		Matrix mB22(newSize);
-		
+        
+        Matrix mA11(newSize);
+        Matrix mA12(newSize);
+        Matrix mA21(newSize);
+        Matrix mA22(newSize);
+        Matrix mB11(newSize);
+        Matrix mB12(newSize);
+        Matrix mB21(newSize);
+        Matrix mB22(newSize);
+        
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
                 mA11.setElement(i, j, elements[i][j]);
@@ -261,20 +261,20 @@ vector<vector<int>> Matrix::strassen(Matrix B) {
         }
 
         // Calculando as submatrizes
-		vector<vector<int>> P1 = mA11.strassen(Matrix(mB12.subtractMatrices(mB22)));
-		vector<vector<int>> P2 = Matrix(mA11.addMatrices(mA12)).strassen(mB22);
-		vector<vector<int>> P3 = Matrix(mA21.addMatrices(mA22)).strassen(mB11);
-		vector<vector<int>> P4 = mA22.strassen(Matrix(mB21.subtractMatrices(mB11)));      
-		vector<vector<int>> P5 = Matrix(mA11.addMatrices(mA22)).strassen(Matrix(mB11.addMatrices(mB22)));
-		vector<vector<int>> P6 = Matrix(mA12.subtractMatrices(mA22)).strassen(Matrix(mB21.addMatrices(mB22)));
-		vector<vector<int>> P7 = Matrix(mA11.subtractMatrices(mA21)).strassen(Matrix(mB11.addMatrices(mB12)));
-		
+        vector<vector<int>> P1 = mA11.strassen(Matrix(mB12.subtractMatrices(mB22)));
+        vector<vector<int>> P2 = Matrix(mA11.addMatrices(mA12)).strassen(mB22);
+        vector<vector<int>> P3 = Matrix(mA21.addMatrices(mA22)).strassen(mB11);
+        vector<vector<int>> P4 = mA22.strassen(Matrix(mB21.subtractMatrices(mB11)));      
+        vector<vector<int>> P5 = Matrix(mA11.addMatrices(mA22)).strassen(Matrix(mB11.addMatrices(mB22)));
+        vector<vector<int>> P6 = Matrix(mA12.subtractMatrices(mA22)).strassen(Matrix(mB21.addMatrices(mB22)));
+        vector<vector<int>> P7 = Matrix(mA11.subtractMatrices(mA21)).strassen(Matrix(mB11.addMatrices(mB12)));
+        
         // Calculando os elementos da matriz C
         vector<vector<int>> C11 = addMatrices(subtractMatrices(addMatrices(P5, P4), P2), P6);
         vector<vector<int>> C12 = addMatrices(P1, P2);
         vector<vector<int>> C21 = addMatrices(P3, P4);
         vector<vector<int>> C22 = subtractMatrices(subtractMatrices(addMatrices(P5, P1), P3), P7);
-		
+        
         // Combinando as submatrizes para obter a matriz C
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
@@ -318,7 +318,7 @@ vector<vector<int>> Matrix::strassen(const vector<vector<int>>& A, const vector<
                 B22[i][j] = B[i + newSize][j + newSize];
             }
         }
-		
+        
         // Calculando as submatrizes
         vector<vector<int>> P1 = strassen(A11, subtractMatrices(B12, B22));
         vector<vector<int>> P2 = strassen(addMatrices(A11, A12), B22);
@@ -327,13 +327,13 @@ vector<vector<int>> Matrix::strassen(const vector<vector<int>>& A, const vector<
         vector<vector<int>> P5 = strassen(addMatrices(A11, A22), addMatrices(B11, B22));
         vector<vector<int>> P6 = strassen(subtractMatrices(A12, A22), addMatrices(B21, B22));
         vector<vector<int>> P7 = strassen(subtractMatrices(A11, A21), addMatrices(B11, B12));
-		
+        
         // Calculando os elementos da matriz C
         vector<vector<int>> C11 = addMatrices(subtractMatrices(addMatrices(P5, P4), P2), P6);
         vector<vector<int>> C12 = addMatrices(P1, P2);
         vector<vector<int>> C21 = addMatrices(P3, P4);
         vector<vector<int>> C22 = subtractMatrices(subtractMatrices(addMatrices(P5, P1), P3), P7);
-		
+        
         // Combinando as submatrizes para obter a matriz C
         for (int i = 0; i < newSize; ++i) {
             for (int j = 0; j < newSize; ++j) {
@@ -361,64 +361,64 @@ int main(int argc, char** argv){
         cerr << "Erro ao abrir o arquivo." << endl;
         return 1;
     }
-	
-	char algorithm = *argv[2];
-	//cout << algorithm << endl;
+    
+    char algorithm = *argv[2];
+    //cout << algorithm << endl;
 
     int n, value;
     inputFile >> n;
 
-	int isPowerOf2 = n && !(n & (n - 1)); // Verifica se n é potência de 2.
-	//cout << isPowerOf2 << endl;
+    int isPowerOf2 = n && !(n & (n - 1)); // Verifica se n é potência de 2.
+    //cout << isPowerOf2 << endl;
 
-	Matrix A(n);
-	Matrix B(n);
-	
+    Matrix A(n);
+    Matrix B(n);
+    
     // Leitura das matrizes A e B do arquivo
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j){
-			inputFile >> value;
-			A.setElement(i, j, value);
-		}
+            inputFile >> value;
+            A.setElement(i, j, value);
+        }
 
     for (int i = 0; i < n; ++i)
         for (int j = 0; j < n; ++j){
-			inputFile >> value;
-			B.setElement(i, j, value);
-		}
-	
+            inputFile >> value;
+            B.setElement(i, j, value);
+        }
+    
     inputFile.close();
 
-	if (algorithm == 'm') {
-		// Multiplicação das matrizes usando o algoritmo Square Matrix Multiply.
-		// Início medição de tempo
-		auto begin = chrono::high_resolution_clock::now();
-		Matrix C(A.squareMatrixMultiply(B));
-		// Fim medição de tempo
-		auto end = chrono::high_resolution_clock::now();
-		auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
-		//cout << "\nTempo de execucao [Square Matrix Multiply]: " << elapsed.count() * 1e-9 << endl;
-		// Impressão da matriz resultante
-		//cout << "\nMatrix C:" << endl;
-		if (isPowerOf2)
-			C.printMatrix();
-		else
-			C.printMatrix(n);
-	} else {
-		// Multiplicação das matrizes usando o algoritmo de Strassen.
-		// Início medição de tempo
-		auto begin = chrono::high_resolution_clock::now();
-		Matrix C(A.strassen(B));
-		// Fim medição de tempo
-		auto end = chrono::high_resolution_clock::now();
-		auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
-		//cout << "\nTempo de execucao [Algoritmo de Strassen]: " << elapsed.count() * 1e-9 << endl;
-		// Impressão da matriz resultante
-		//cout << "\nMatrix C:" << endl;
-		if (isPowerOf2)
-			C.printMatrix();
-		else
-			C.printMatrix(n);
-	}
+    if (algorithm == 'm') {
+        // Multiplicação das matrizes usando o algoritmo Square Matrix Multiply.
+        // Início medição de tempo
+        auto begin = chrono::high_resolution_clock::now();
+        Matrix C(A.squareMatrixMultiply(B));
+        // Fim medição de tempo
+        auto end = chrono::high_resolution_clock::now();
+        auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+        //cout << "\nTempo de execucao [Square Matrix Multiply]: " << elapsed.count() * 1e-9 << endl;
+        // Impressão da matriz resultante
+        //cout << "\nMatrix C:" << endl;
+        if (isPowerOf2)
+            C.printMatrix();
+        else
+            C.printMatrix(n);
+    } else {
+        // Multiplicação das matrizes usando o algoritmo de Strassen.
+        // Início medição de tempo
+        auto begin = chrono::high_resolution_clock::now();
+        Matrix C(A.strassen(B));
+        // Fim medição de tempo
+        auto end = chrono::high_resolution_clock::now();
+        auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+        //cout << "\nTempo de execucao [Algoritmo de Strassen]: " << elapsed.count() * 1e-9 << endl;
+        // Impressão da matriz resultante
+        //cout << "\nMatrix C:" << endl;
+        if (isPowerOf2)
+            C.printMatrix();
+        else
+            C.printMatrix(n);
+    }
     return 0;
 }
