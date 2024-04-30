@@ -397,7 +397,7 @@ int main(int argc, char** argv){
         // Fim medição de tempo
         auto end = chrono::high_resolution_clock::now();
         auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
-        //cout << "\nTempo de execucao [Square Matrix Multiply]: " << elapsed.count() * 1e-9 << endl;
+        cout << "\nTempo de execucao [Square Matrix Multiply]: " << elapsed.count() * 1e-9 << endl;
         // Impressão da matriz resultante
         //cout << "\nMatrix C:" << endl;
         if (isPowerOf2)
@@ -412,7 +412,7 @@ int main(int argc, char** argv){
         // Fim medição de tempo
         auto end = chrono::high_resolution_clock::now();
         auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
-        //cout << "\nTempo de execucao [Algoritmo de Strassen]: " << elapsed.count() * 1e-9 << endl;
+        cout << "\nTempo de execucao [Algoritmo de Strassen]: " << elapsed.count() * 1e-9 << endl;
         // Impressão da matriz resultante
         //cout << "\nMatrix C:" << endl;
         if (isPowerOf2)

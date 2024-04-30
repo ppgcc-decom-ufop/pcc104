@@ -1,0 +1,15 @@
+### Instruções para compilação e execução dos programas ###
+
+* Tarefa 1 - Multiplicação de matrizes
+Para a compilação do código associado à Tarefa 1, basta digitar, no terminal: 
+gcc task1-square-matrix-multiply.cpp -o task1-square-matrix-multiply
+
+Para a execução do programa basta digitar:
+./task1-square-matrix-multiply.exe <arquivo.dat> <algoritmo [m: square-matrix-multiply | s: strassen algorithm]>
+
+* Tarefa 2 - Algoritmo de Dijkstra
+Para a compilação do código associado à Tarefa 2, basta digitar, no terminal:
+gcc task2-dijkstra-algorithm-shortint.cpp -o task2-dijkstra-algorithm-shortint
+
+Para a execução do programa basta digitar:
+./task2-dijkstra-algorithm-shortint.exe <arquivoProblema> <nrExecuções> <flagDepuração>

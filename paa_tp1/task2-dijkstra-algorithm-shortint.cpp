@@ -14,6 +14,7 @@
 #include <limits>
 #include <queue>
 #include <algorithm>
+#include <chrono>
 
 using namespace std;
 
@@ -163,7 +164,11 @@ int main(int argc, char* argv[]) {
     for (unsigned short int i = 0; i < numExecutions; ++i) {
         // Imprimir os caminhos mínimos em arquivo, se a flag de depuração estiver ativada.
         if (debugFlag) {
+			auto begin = chrono::high_resolution_clock::now();			
             pair<vector<unsigned int>, vector<unsigned int>> result = graph.dijkstra(startVertex);
+			auto end = chrono::high_resolution_clock::now();
+			auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);
+			cout << "\nTempo de execucao [graph.dijkstra]: " << elapsed.count() * 1e-9 << endl;
             // Reconstrói o caminho mínimo
             //int targetVertex;// = stoi(argv[4]);
              string s = ".gr";
@@ -191,8 +196,11 @@ int main(int argc, char* argv[]) {
             spath.close();
         } else {        
             cout << "\nstartVertex = " << (startVertex + 1) << endl;
+			auto begin = chrono::high_resolution_clock::now();			
             pair<vector<unsigned int>, vector<unsigned int>> result = graph.dijkstra(startVertex);
-
+			auto end = chrono::high_resolution_clock::now();
+			auto elapsed = chrono::duration_cast<chrono::nanoseconds>(end - begin);			
+			cout << "\nTempo de execucao [graph.dijkstra]: " << elapsed.count() * 1e-9 << endl;
             for (unsigned int targetVertex = 1; targetVertex <= numVertices; targetVertex++) {
                 vector<unsigned int> path = graph.reconstructPath(startVertex, targetVertex - 1, result.second);
                 // Exibe o caminho mínimo no formato especificado
