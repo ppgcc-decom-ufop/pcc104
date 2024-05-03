@@ -1,5 +1,7 @@
 ### Instruções para compilação e execução dos programas ###
 
+Ambiente Windows
+
 * Tarefa 1 - Multiplicação de matrizes
 Para a compilação do código associado à Tarefa 1, basta digitar, no terminal: 
 gcc task1-square-matrix-multiply.cpp -o task1-square-matrix-multiply
@@ -13,3 +15,25 @@ gcc task2-dijkstra-algorithm-shortint.cpp -o task2-dijkstra-algorithm-shortint
 
 Para a execução do programa basta digitar:
 ./task2-dijkstra-algorithm-shortint.exe <arquivoProblema> <nrExecuções> <flagDepuração>
+
+Ambiente Linux
+
+* Tarefa 1 - Multiplicação de matrizes
+Para a compilação do código associado à Tarefa 1, basta digitar, no terminal: 
+g++ task1-square-matrix-multiply.cpp -o task1-square-matrix-multiply -std=c++11
+
+Para a execução do programa basta digitar:
+./task1-square-matrix-multiply.exe <arquivo.dat> <algoritmo [m: square-matrix-multiply | s: strassen algorithm]>
+
+* Tarefa 2 - Algoritmo de Dijkstra
+Para a compilação do código associado à Tarefa 2, basta digitar, no terminal:
+g++ task2-dijkstra-algorithm-shortint.cpp -o task2-dijkstra-algorithm-shortint -std=c++11
+
+Para a execução do programa basta digitar:
+./task2-dijkstra-algorithm-shortint <arquivoProblema> <nrExecuções> <flagDepuração>
+
+Obs.: Opcionalmente, pode-se utilizar o comando time para medir o tempo de execução, porque a biblioteca <chrono> não é compatível com ambiente linux.
+Ex.: 
+time ./task1-square-matrix-multiply.exe <arquivo.dat> <algoritmo [m: square-matrix-multiply | s: strassen algorithm]>
+
+time ./task2-dijkstra-algorithm-shortint <arquivoProblema> <nrExecuções> <flagDepuração>
