@@ -1,1 +1,35 @@
 ### Instruções para compilação e execução dos programas ###
+
+Ambiente Windows
+
+* Tarefa 1 - Multiplicação de matrizes
+Para a compilação do código associado à Tarefa 1, basta digitar, no terminal: 
+gcc task1-max-clique.cpp -o task1-max-clique
+
+Para a execução do programa basta digitar:
+./task1-max-clique.exe <arquivo.clq | arquivo.grafo> <maxtime> <algoritmo [bp: backtrac-
+king | bb: branch&bound]>
+
+* Tarefa 2 - Algoritmo de Dijkstra
+Para a compilação do código associado à Tarefa 2, basta digitar, no terminal:
+gcc task2-min-cliques.cpp -o task2-min-cliques
+
+Para a execução do programa basta digitar:
+./task2-minimum-number-of-cliques.exe <arquivo.clq | arquivo.grafo> <maxtime>
+
+Ambiente Linux
+
+* Tarefa 1 - Multiplicação de matrizes
+Para a compilação do código associado à Tarefa 1, basta digitar, no terminal: 
+g++ task1-max-clique.cpp -o task1-max-clique -std=c++11
+
+Para a execução do programa basta digitar:
+./task1-max-clique.exe <arquivo.clq | arquivo.grafo> <maxtime> <algoritmo [bp: backtrac-
+king | bb: branch&bound]>
+
+* Tarefa 2 - Algoritmo de Dijkstra
+Para a compilação do código associado à Tarefa 2, basta digitar, no terminal:
+g++ task2-min-cliques.cpp -o task2-min-cliques -std=c++11
+
+Para a execução do programa basta digitar:
+./task2-minimum-number-of-cliques.exe <arquivo.clq | arquivo.grafo> <maxtime>
