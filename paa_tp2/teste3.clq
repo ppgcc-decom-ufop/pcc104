@@ -1,0 +1,16 @@
+c FILE:  teste3
+c Clique Elements are:
+c 1 2 3
+c 4 5 6 7
+c
+p edge 7 10
+e 2 1
+e 3 1
+e 3 2
+e 4 3
+e 5 4
+e 6 4
+e 6 5
+e 7 4
+e 7 5
+e 7 6
