@@ -104,7 +104,7 @@ int main(int argc, char* argv[]) {
     }
 
     string filename = argv[1];
-    int timetorun = stoi(argv[2]);
+    int timetorun = atoi(argv[2]);
     //string strategy = argv[3];
 
     ifstream file(filename);

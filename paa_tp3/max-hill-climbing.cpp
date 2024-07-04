@@ -21,11 +21,27 @@
 using namespace std;
 
 class Graph {
-public:
+private:
     int V;
-    std::vector<std::vector<int>> adj;
+    vector<vector<int> > adj;
+	double maxTime;
+    std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long long int, std::ratio<1ll, 1000000000ll> > > initTime;
+    std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long long int, std::ratio<1ll, 1000000000ll> > > endTime;
+    std::chrono::duration<long long int, std::ratio<1ll, 1000000000ll> > elapsedTime;
+	
+public:
+    Graph(int V) : V(V) {
+        adj.resize(V);
+    }
+	
+    void setInitialAndMaxTime(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long long int, std::ratio<1ll, 1000000000ll> > > initial, double time) {
+        initTime = initial;
+        maxTime = time;
+    }
 
-    Graph(int V) : V(V), adj(V) {}
+    auto getElasedTime(){
+        return elapsedTime.count();
+    }	
 
     void addEdge(int u, int v) {
         adj[u].push_back(v);
@@ -63,8 +79,11 @@ public:
     }
 
     std::vector<int> hillClimbing() {
+		endTime = chrono::high_resolution_clock::now();
+        auto elapsed = chrono::duration_cast<chrono::nanoseconds>(endTime - initTime);
+		
         std::vector<int> current = getRandomClique();
-        while (true) {
+        while (true && (elapsed < chrono::duration_cast<chrono::nanoseconds>(std::chrono::duration<double>(maxTime)))) {
             std::vector<int> neighbors = getNeighbors(current);
             std::vector<int> bestNeighbor = current;
             for (int neighbor : neighbors) {
@@ -78,6 +97,8 @@ public:
                 break;
             }
             current = bestNeighbor;
+			endTime = chrono::high_resolution_clock::now();
+			auto elapsed = chrono::duration_cast<chrono::nanoseconds>(endTime - initTime);
         }
         return current;
     }
@@ -161,7 +182,9 @@ int main(int argc, char* argv[]) {
 	g.addEdge(4, 5);
     g.addEdge(4, 6);
     g.addEdge(5, 6); */
-
+	
+	auto initTime = chrono::high_resolution_clock::now();
+    graph.setInitialAndMaxTime(initTime, timetorun);
     std::vector<int> clique = graph.hillClimbing();
     //std::cout << "Clique máximo encontrado: ";
 	cout << clique.size() << endl;
