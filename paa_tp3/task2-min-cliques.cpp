@@ -230,10 +230,10 @@ public:
         return false;
     }
 
-    vector<vector<int>> vertexCoverByCliques(int timeLimit, string strategy) {
+    vector<vector<int> > vertexCoverByCliques(int timeLimit, string strategy) {
         // Inicializa o contador de tempo e a lista de cliques encontrados
         auto start = chrono::steady_clock::now();
-        vector<vector<int>> cliques;
+        vector<vector<int> > cliques;
         unordered_set<int> coveredVertices;
         int maxIterations = 1000; // Numero maximo de iteracoes para as estrategias Simulated Annealing e Tabu Search
         double initialTemp = 1000.0; // Temperatura inicial para o Simulated Annealing
@@ -347,7 +347,7 @@ int main(int argc, char* argv[]) {
     }
     file.close();
     
-    vector<vector<int>> cliques;
+    vector<vector<int> > cliques;
     cliques = graph.vertexCoverByCliques(timetorun, strategy);
 
     cout << cliques.size() << endl;

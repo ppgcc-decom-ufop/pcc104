@@ -182,7 +182,7 @@ public:
     }
     
     vector<int> tabuSearch(int maxIterations, int maxTabuSize) {
-        // Verifica quanto tempo decorrido
+        // Verifica o tempo decorrido
         endTime = chrono::high_resolution_clock::now();
         auto elapsed = chrono::duration_cast<chrono::nanoseconds>(endTime - initTime);
         
