@@ -109,37 +109,6 @@ public:
 		// Retorna a melhor clique encontrada
 		return current;
 	}
-
-	
-/*     vector<int> simulatedAnnealing(const unordered_set<int>& coveredVertices, int maxIterations, double initialTemp, double coolingRate) {
-        vector<int> current = getRandomClique(coveredVertices);
-        vector<int> best = current;
-        double temp = initialTemp;
-
-        for (int iteration = 0; iteration < maxIterations; ++iteration) {
-            vector<int> neighbors = getNeighbors(current, coveredVertices);
-            if (neighbors.empty()) break;
-
-            int neighbor = neighbors[rand() % neighbors.size()];
-            vector<int> newClique = current;
-            newClique.push_back(neighbor);
-
-            if (isClique(newClique)) {
-                double deltaE = newClique.size() - current.size();
-                if (deltaE > 0 || exp(deltaE / temp) > ((double) rand() / RAND_MAX)) {
-                    current = newClique;
-                }
-
-                if (current.size() > best.size()) {
-                    best = current;
-                }
-            }
-
-            temp *= coolingRate;
-        }
-
-        return best;
-    } */
 	
 	vector<int> simulatedAnnealing(const unordered_set<int>& coveredVertices, int maxIterations, double initialTemp, double coolingRate) {
 		// Inicializa a clique atual e a melhor clique com um vertice aleatorio nao coberto
@@ -185,44 +154,6 @@ public:
 		// Retorna a melhor clique encontrada
 		return best;
 	}
-	
-/*     vector<int> tabuSearch(const unordered_set<int>& coveredVertices, int maxIterations, int tabuTenure) {
-        vector<int> current = getRandomClique(coveredVertices);
-        vector<int> best = current;
-        deque<vector<int>> tabuList;
-        tabuList.push_back(current);
-
-        for (int iteration = 0; iteration < maxIterations; ++iteration) {
-            vector<int> neighbors = getNeighbors(current, coveredVertices);
-            if (neighbors.empty()) break;
-
-            vector<int> bestNeighbor = current;
-            for (int neighbor : neighbors) {
-                vector<int> newClique = current;
-                newClique.push_back(neighbor);
-
-                if (isClique(newClique) && (find(tabuList.begin(), tabuList.end(), newClique) == tabuList.end())) {
-                    bestNeighbor = newClique;
-                    break;
-                }
-            }
-
-            if (bestNeighbor.size() > current.size()) {
-                current = bestNeighbor;
-                if (current.size() > best.size()) {
-                    best = current;
-                }
-                tabuList.push_back(current);
-                if (tabuList.size() > tabuTenure) {
-                    tabuList.pop_front();
-                }
-            } else {
-                break;
-            }
-        }
-
-        return best;
-    }	 */
 	
 	vector<int> tabuSearch(const unordered_set<int>& coveredVertices, int maxIterations, int tabuTenure) {
 		// Inicializa a clique atual e a melhor clique com um vertice aleatorio
